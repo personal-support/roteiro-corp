@@ -11,9 +11,21 @@ export async function POST(req: Request) {
   const body = await req.json();
   const parsed = TripRequestSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Dados inválidos", details: parsed.error.flatten() }, { status: 400 });
+    return NextResponse.json(
+      { error: "Dados inválidos", details: parsed.error.flatten() },
+      { status: 400 }
+    );
   }
 
-  const result = await generateItinerary(parsed.data);
-  return NextResponse.json(result);
+  try {
+    const result = await generateItinerary(parsed.data);
+    return NextResponse.json(result);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error("[itinerary] erro:", msg);
+    return NextResponse.json(
+      { error: `Erro interno: ${msg}` },
+      { status: 500 }
+    );
+  }
 }
