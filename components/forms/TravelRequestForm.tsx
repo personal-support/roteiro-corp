@@ -24,7 +24,7 @@ const stepTypeLabel: Record<StepType, string> = {
 const stepTypeColor: Record<StepType, string> = {
   transfer: "bg-purple-50 border-purple-200",
   bus: "bg-orange-50 border-orange-200",
-  flight: "bg-blue-50 border-blue-200",
+  flight: "bg-blue-50 border-[#212771]/20",
   car_rental: "bg-teal-50 border-teal-200",
   hotel: "bg-yellow-50 border-yellow-200",
   other: "bg-gray-50 border-gray-200",
@@ -186,7 +186,7 @@ export default function TravelRequestForm() {
       <div className="flex border-b border-gray-200">
         {["Dados da viagem", "Roteiro gerado pela IA"].map((label, i) => (
           <div key={label} className={`flex-1 py-3 text-center text-xs font-medium border-b-2 transition-colors ${
-            step === i + 1 ? "border-blue-600 text-blue-600" :
+            step === i + 1 ? "border-[#f86924] text-[#f86924]" :
             step > i + 1 ? "border-green-500 text-green-600" :
             "border-transparent text-gray-400"
           }`}>
@@ -251,7 +251,7 @@ export default function TravelRequestForm() {
           {error && <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
           <button onClick={generateAI} disabled={aiLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50">
+            className="w-full bg-[#212771] hover:bg-[#1a1f5e] text-white font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50">
             {aiLoading ? "Gerando roteiro com IA..." : "✨ Gerar roteiro com IA →"}
           </button>
         </div>
@@ -262,7 +262,7 @@ export default function TravelRequestForm() {
         <div className="space-y-4">
           {/* Resumo IA */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <p className="text-xs font-semibold text-blue-700 mb-1 uppercase tracking-wide">✨ Análise da IA</p>
+            <p className="text-xs font-semibold text-[#212771] mb-1 uppercase tracking-wide">✨ Análise da IA</p>
             <p className="text-sm text-gray-800">{aiSummary}</p>
           </div>
 
@@ -283,7 +283,7 @@ export default function TravelRequestForm() {
                 Roteiro — {steps.length} etapa{steps.length !== 1 ? "s" : ""}
               </h3>
               <button onClick={addStep}
-                className="text-xs text-blue-600 hover:underline font-medium">
+                className="text-xs text-[#f86924] hover:underline font-medium">
                 + Adicionar etapa
               </button>
             </div>
@@ -310,17 +310,17 @@ export default function TravelRequestForm() {
                 <input type="text" value={s.description}
                   onChange={(e) => updateStep(i, "description", e.target.value)}
                   placeholder="Descrição da etapa"
-                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
 
                 <div className="grid grid-cols-2 gap-2">
                   <input type="text" value={s.origin}
                     onChange={(e) => updateStep(i, "origin", e.target.value)}
                     placeholder="Origem"
-                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                   <input type="text" value={s.destination}
                     onChange={(e) => updateStep(i, "destination", e.target.value)}
                     placeholder="Destino"
-                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
@@ -329,14 +329,14 @@ export default function TravelRequestForm() {
                     <input type="text" value={s.datetime_start}
                       onChange={(e) => updateStep(i, "datetime_start", e.target.value)}
                       placeholder="DD/MM/YYYY HH:mm"
-                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 mb-0.5">Fim</p>
                     <input type="text" value={s.datetime_end}
                       onChange={(e) => updateStep(i, "datetime_end", e.target.value)}
                       placeholder="DD/MM/YYYY HH:mm"
-                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                   </div>
                 </div>
 
@@ -346,20 +346,20 @@ export default function TravelRequestForm() {
                     <input type="number" value={s.estimated_value ?? ""}
                       onChange={(e) => updateStep(i, "estimated_value", e.target.value ? Number(e.target.value) : null)}
                       placeholder="0,00"
-                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 mb-0.5">Passageiros</p>
                     <input type="number" min={1} value={s.passengers}
                       onChange={(e) => updateStep(i, "passengers", Number(e.target.value))}
-                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924]" />
                   </div>
                 </div>
 
                 <textarea value={s.notes} onChange={(e) => updateStep(i, "notes", e.target.value)}
                   placeholder="Observações para cotação..."
                   rows={2}
-                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none" />
+                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#f86924] resize-none" />
               </div>
             ))}
           </div>
@@ -396,7 +396,7 @@ export default function TravelRequestForm() {
   );
 }
 
-const input = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+const input = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

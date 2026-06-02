@@ -2,11 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Sidebar from "@/components/shared/Sidebar";
 
-export default async function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -17,32 +13,34 @@ export default async function DashboardLayout({
     .eq("id", user.id)
     .single();
 
-  // Se perfil não existe, mostra layout sem sidebar para debug
   if (!profile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-xl border border-gray-200 p-8 max-w-md w-full space-y-3">
-          <h2 className="font-bold text-gray-900">Perfil não encontrado</h2>
-          <p className="text-sm text-gray-500">Usuário autenticado mas sem perfil cadastrado.</p>
+      <div className="min-h-screen bg-[#ebeff2] flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl border border-[#dddddd] p-8 max-w-md w-full space-y-3">
+          <h2 className="font-bold text-[#212771]">Perfil não encontrado</h2>
+          <p className="text-sm text-[#555555]">Usuário autenticado mas sem perfil cadastrado.</p>
           <p className="text-xs text-gray-400 font-mono">user_id: {user.id}</p>
-          <p className="text-xs text-gray-400 font-mono">email: {user.email}</p>
         </div>
       </div>
     );
   }
 
-  // Buscar nome da empresa separado para não complicar o tipo
   const { data: company } = await supabase
-    .from("companies")
-    .select("name")
-    .eq("id", profile.company_id)
-    .single();
+    .from("companies").select("name").eq("id", profile.company_id).single();
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-[#ebeff2]">
       <Sidebar profile={{ ...profile, company }} />
-      <main className="flex-1 overflow-auto">
-        <div className="p-6 max-w-7xl mx-auto">{children}</div>
+      <main className="flex-1 min-w-0 overflow-auto">
+        {/* Header mobile */}
+        <div className="md:hidden h-14" />
+        <div className="p-4 md:p-6 max-w-5xl mx-auto">
+          {children}
+        </div>
+        {/* Rodapé mobile */}
+        <footer className="md:hidden text-center py-4 text-xs text-gray-400">
+          Desenvolvido por <span className="text-[#f86924] font-semibold">J.Lopes Personal Support</span>
+        </footer>
       </main>
     </div>
   );

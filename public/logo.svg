@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Ícone: rota com ponto de origem e destino -->
+  <circle cx="10" cy="24" r="5" fill="#f86924"/>
+  <circle cx="10" cy="24" r="2.5" fill="#ffffff"/>
+  <path d="M15 24 Q28 12 38 24 Q48 36 58 24" stroke="#f86924" stroke-width="2.5" stroke-linecap="round" fill="none" stroke-dasharray="4 3"/>
+  <circle cx="63" cy="24" r="5" fill="#212771"/>
+  <!-- Avião pequeno no meio da rota -->
+  <path d="M35 19 L39 24 L35 29 L36.5 24 Z" fill="#f86924" opacity="0.7"/>
+  <!-- Texto -->
+  <text x="76" y="20" font-family="Open Sans, sans-serif" font-weight="700" font-size="13" fill="#212771">ROTEIRO</text>
+  <text x="76" y="35" font-family="Open Sans, sans-serif" font-weight="300" font-size="13" fill="#f86924">CORP</text>
+</svg>

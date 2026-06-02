@@ -58,7 +58,7 @@ export default function ApprovalActions({ requestId }: { requestId: string }) {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Observações (opcional)..."
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924] resize-none"
           />
           <div className="flex gap-3">
             <button

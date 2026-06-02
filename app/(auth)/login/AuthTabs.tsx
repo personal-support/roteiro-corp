@@ -114,7 +114,7 @@ export default function AuthTabs() {
               onClick={() => switchTab(t)}
               className={`flex-1 pb-3 text-sm font-medium transition-colors border-b-2 -mb-px ${
                 tab === t
-                  ? "border-blue-600 text-blue-600"
+                  ? "border-[#f86924] text-[#f86924]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -135,7 +135,7 @@ export default function AuthTabs() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="seu@empresa.com.br"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
             />
           </div>
           <div>
@@ -146,7 +146,7 @@ export default function AuthTabs() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="••••••••"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function AuthTabs() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
+            className="w-full bg-[#212771] hover:bg-[#1a1f5e] text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
           >
             {loading ? "Entrando..." : "Entrar"}
           </button>
@@ -181,7 +181,7 @@ export default function AuthTabs() {
               onChange={(e) => setFullName(e.target.value)}
               required
               placeholder="Seu nome completo"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
             />
           </div>
           <div>
@@ -192,7 +192,7 @@ export default function AuthTabs() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="seu@empresa.com.br"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
             />
           </div>
           <div>
@@ -204,7 +204,7 @@ export default function AuthTabs() {
               required
               minLength={8}
               placeholder="Mínimo 8 caracteres"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
             />
           </div>
 
@@ -214,7 +214,7 @@ export default function AuthTabs() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
+            className="w-full bg-[#212771] hover:bg-[#1a1f5e] text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
           >
             {loading ? "Criando conta..." : "Criar conta"}
           </button>
@@ -250,7 +250,7 @@ export default function AuthTabs() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="seu@empresa.com.br"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f86924]"
               />
             </div>
 
@@ -260,7 +260,7 @@ export default function AuthTabs() {
             <button
               type="submit"
               disabled={loading || !!success}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
+              className="w-full bg-[#212771] hover:bg-[#1a1f5e] text-white font-medium py-2 rounded-lg text-sm transition-colors disabled:opacity-50"
             >
               {loading ? "Enviando..." : "Enviar link de recuperação"}
             </button>
