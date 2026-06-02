@@ -58,13 +58,33 @@ export default function TravelRequestForm() {
     setAiLoading(true);
     setError(null);
     try {
+      const payload = {
+        ...form,
+        passengers: Number(form.passengers),
+        estimated_value: form.estimated_value ? Number(form.estimated_value) : undefined,
+        return_date: form.return_date || undefined,
+        origin: form.origin || undefined,
+        cost_center: form.cost_center || undefined,
+        notes: form.notes || undefined,
+      };
+
       const res = await fetch("/api/ai/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Erro ao gerar resumo");
+
+      if (!res.ok) {
+        const detail = data.details?.fieldErrors
+          ? Object.entries(data.details.fieldErrors as Record<string, unknown[]>)
+              .map(([k, v]) => `${k}: ${v}`)
+              .join(", ")
+          : "";
+        throw new Error(data.error + (detail ? ` (${detail})` : ""));
+      }
+
       setAiResult(data);
       setStep(3);
     } catch (e) {
