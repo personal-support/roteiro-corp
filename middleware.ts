@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Rotas públicas
-  const publicPaths = ["/login", "/register", "/api/health"];
+  const publicPaths = ["/login", "/register", "/api/health", "/reset-password", "/api/auth/register"];
   const isPublic = publicPaths.some((p) => pathname.startsWith(p));
 
   if (!user && !isPublic) {
