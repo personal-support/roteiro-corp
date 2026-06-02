@@ -42,7 +42,9 @@ export default function Sidebar({
         <div className="flex items-center gap-3 mb-1">
           <Image src="/logo.svg" alt="Roteiro Corp" width={120} height={28} className="brightness-0 invert" />
         </div>
-        <p className="text-xs text-white/50 truncate mt-1">{profile.company?.name || "—"}</p>
+        <div className="mt-2 flex items-center gap-2">
+          <Image src="/consuldata-logo.png" alt="Consuldata" width={90} height={28} className="object-contain" />
+        </div>
       </div>
 
       {/* Nav */}

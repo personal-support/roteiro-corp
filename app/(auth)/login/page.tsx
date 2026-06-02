@@ -12,6 +12,9 @@ export default function LoginPage() {
             <Image src="/logo.svg" alt="Roteiro Corp" width={140} height={32} className="brightness-0 invert" />
           </div>
           <p className="text-sm text-[#555555]">Gestão de viagens corporativas</p>
+        <div className="mt-3 flex justify-center">
+          <Image src="/consuldata-logo.png" alt="Consuldata" width={120} height={36} className="object-contain" />
+        </div>
         </div>
 
         {/* Card */}
