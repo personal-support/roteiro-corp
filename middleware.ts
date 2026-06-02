@@ -25,16 +25,23 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   const { pathname } = request.nextUrl;
 
-  // Rotas públicas
-  const publicPaths = ["/login", "/register", "/api/health", "/reset-password", "/api/auth/register"];
+  // Rotas que nunca redirecionam
+  const publicPaths = [
+    "/login",
+    "/register", 
+    "/reset-password",
+    "/api/",
+    "/_next/",
+    "/favicon.ico",
+  ];
+
   const isPublic = publicPaths.some((p) => pathname.startsWith(p));
 
+  // Não autenticado tentando acessar rota protegida
   if (!user && !isPublic) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
@@ -42,9 +49,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && (pathname === "/login" || pathname === "/register")) {
+  // Autenticado tentando acessar login — só redireciona se não tiver returnUrl
+  if (user && pathname === "/login") {
+    const returnUrl = request.nextUrl.searchParams.get("returnUrl");
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = returnUrl && returnUrl !== "/login" ? returnUrl : "/dashboard";
+    url.searchParams.delete("returnUrl");
     return NextResponse.redirect(url);
   }
 
