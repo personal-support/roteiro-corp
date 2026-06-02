@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import type { RequestStatus, TripType } from "@/lib/types";
+import type { RequestStatus } from "@/lib/types";
 import ApprovalActions from "@/components/dashboard/ApprovalActions";
 
 const statusLabel: Record<RequestStatus, string> = {
@@ -13,10 +13,6 @@ const statusColor: Record<RequestStatus, string> = {
   approved: "bg-green-100 text-green-700", in_progress: "bg-blue-100 text-blue-700",
   completed: "bg-emerald-100 text-emerald-700", cancelled: "bg-gray-100 text-gray-500",
   rejected: "bg-red-100 text-red-700",
-};
-const tripLabel: Record<TripType, string> = {
-  transfer: "Traslado", flight: "Passagem aérea", car_rental: "Locação",
-  hotel: "Hospedagem", combined: "Combinado",
 };
 
 export default async function RequestDetailPage({
@@ -59,7 +55,7 @@ export default async function RequestDetailPage({
         <div>
           <h1 className="text-xl font-bold text-gray-900">{req.destination}</h1>
           <p className="text-sm text-gray-500">
-            {tripLabel[req.trip_type as TripType]} · {req.travel_date}
+            {req.trip_type} · {req.travel_date}
             {req.return_date ? ` → ${req.return_date}` : ""}
           </p>
         </div>

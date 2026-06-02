@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import type { RequestStatus, TripType } from "@/lib/types";
+import type { RequestStatus } from "@/lib/types";
 import Link from "next/link";
 
 const statusLabel: Record<RequestStatus, string> = {
@@ -13,10 +13,6 @@ const statusColor: Record<RequestStatus, string> = {
   approved: "bg-green-100 text-green-700", in_progress: "bg-blue-100 text-blue-700",
   completed: "bg-emerald-100 text-emerald-700", cancelled: "bg-gray-100 text-gray-500",
   rejected: "bg-red-100 text-red-700",
-};
-const tripLabel: Record<TripType, string> = {
-  transfer: "Traslado", flight: "Aéreo", car_rental: "Locação",
-  hotel: "Hotel", combined: "Combinado",
 };
 
 export default async function DashboardPage() {
@@ -92,7 +88,7 @@ export default async function DashboardPage() {
             >
               <div>
                 <p className="text-sm font-medium text-gray-900">{req.destination}</p>
-                <p className="text-xs text-gray-500">{tripLabel[req.trip_type as TripType]} · {req.travel_date}</p>
+                <p className="text-xs text-gray-500">{req.trip_type} · {req.travel_date}</p>
               </div>
               <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${statusColor[req.status as RequestStatus]}`}>
                 {statusLabel[req.status as RequestStatus]}

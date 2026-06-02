@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
-import type { RequestStatus, TripType } from "@/lib/types";
+import type { RequestStatus } from "@/lib/types";
 
 const statusLabel: Record<RequestStatus, string> = {
   draft: "Rascunho", pending: "Pendente", approved: "Aprovado",
@@ -12,10 +12,6 @@ const statusColor: Record<RequestStatus, string> = {
   approved: "bg-green-100 text-green-700", in_progress: "bg-blue-100 text-blue-700",
   completed: "bg-emerald-100 text-emerald-700", cancelled: "bg-gray-100 text-gray-500",
   rejected: "bg-red-100 text-red-700",
-};
-const tripLabel: Record<TripType, string> = {
-  transfer: "Traslado", flight: "Aéreo", car_rental: "Locação",
-  hotel: "Hotel", combined: "Combinado",
 };
 
 export default async function RequestsPage() {
@@ -73,7 +69,7 @@ export default async function RequestsPage() {
             {requests?.map((req) => (
               <tr key={req.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium text-gray-900">{req.destination}</td>
-                <td className="px-4 py-3 text-gray-600">{tripLabel[req.trip_type as TripType]}</td>
+                <td className="px-4 py-3 text-gray-600">{req.trip_type}</td>
                 <td className="px-4 py-3 text-gray-600">{req.travel_date}</td>
                 <td className="px-4 py-3 text-gray-600">
                   {(req.requester as { full_name?: string } | null)?.full_name || "—"}

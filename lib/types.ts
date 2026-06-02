@@ -1,37 +1,19 @@
 export type Plan = "trial" | "basic" | "pro";
 export type UserRole = "admin" | "buyer" | "requester" | "manager";
-export type TripType = "transfer" | "flight" | "car_rental" | "hotel" | "combined";
+export type StepType = "transfer" | "bus" | "flight" | "car_rental" | "hotel" | "other";
 export type RequestStatus =
-  | "draft"
-  | "pending"
-  | "approved"
-  | "in_progress"
-  | "completed"
-  | "cancelled"
-  | "rejected";
+  | "draft" | "pending" | "approved" | "in_progress" | "completed" | "cancelled" | "rejected";
 export type Priority = "low" | "normal" | "high" | "urgent";
 export type ApprovalAction = "approved" | "rejected" | "requested_changes";
 
 export interface Company {
-  id: string;
-  name: string;
-  cnpj: string | null;
-  domain: string | null;
-  plan: Plan;
-  active: boolean;
-  created_at: string;
-  updated_at: string;
+  id: string; name: string; cnpj: string | null; domain: string | null;
+  plan: Plan; active: boolean; created_at: string; updated_at: string;
 }
 
 export interface Profile {
-  id: string;
-  company_id: string;
-  full_name: string;
-  email: string;
-  role: UserRole;
-  active: boolean;
-  created_at: string;
-  updated_at: string;
+  id: string; company_id: string; full_name: string; email: string;
+  role: UserRole; active: boolean; created_at: string; updated_at: string;
 }
 
 export interface TravelRequest {
@@ -39,58 +21,49 @@ export interface TravelRequest {
   company_id: string;
   requester_id: string;
   buyer_id: string | null;
-  trip_type: TripType;
+  origin: string;
   destination: string;
-  origin: string | null;
-  travel_date: string;
-  return_date: string | null;
+  departure_datetime: string;
+  return_datetime: string | null;
   passengers: number;
   purpose: string;
   cost_center: string | null;
   status: RequestStatus;
   priority: Priority;
-  estimated_value: number | null;
-  final_value: number | null;
-  currency: string;
   ai_summary: string | null;
-  ai_suggestions: Record<string, unknown> | null;
+  ai_warnings: string[] | null;
+  total_estimated: number | null;
+  final_value: number | null;
   notes: string | null;
-  attachments: unknown[];
   created_at: string;
   updated_at: string;
-  // joins opcionais
   requester?: Profile;
   buyer?: Profile;
+  steps?: ItineraryStep[];
+}
+
+export interface ItineraryStep {
+  id: string;
+  request_id: string;
+  order: number;
+  type: StepType;
+  description: string;
+  origin: string;
+  destination: string;
+  datetime_start: string;
+  datetime_end: string;
+  passengers: number;
+  notes: string;
+  supplier_name: string | null;
+  supplier_quote: number | null;
+  estimated_value: number | null;
+  confirmed: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Approval {
-  id: string;
-  request_id: string;
-  approver_id: string;
-  action: ApprovalAction;
-  notes: string | null;
-  created_at: string;
+  id: string; request_id: string; approver_id: string;
+  action: ApprovalAction; notes: string | null; created_at: string;
   approver?: Profile;
-}
-
-export interface RequestQuote {
-  id: string;
-  request_id: string;
-  supplier_name: string;
-  quote_value: number;
-  details: Record<string, unknown> | null;
-  selected: boolean;
-  created_by: string;
-  created_at: string;
-}
-
-export interface RequestHistory {
-  id: string;
-  request_id: string;
-  actor_id: string | null;
-  event: string;
-  old_value: Record<string, unknown> | null;
-  new_value: Record<string, unknown> | null;
-  created_at: string;
-  actor?: Profile;
 }
